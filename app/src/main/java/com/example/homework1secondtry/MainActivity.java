@@ -17,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
@@ -145,10 +146,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             gmap.setMinZoomPreference(12);
                             LatLng ny = new LatLng(latD, lngD);
+                            gmap.addMarker(new MarkerOptions().position(new LatLng(latD, lngD)));
                             gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
 
                             getWeather(latD, lngD);
-
 
                         } catch (JSONException e) {
                            System.out.println("EXCEPTION CAUGHT");
@@ -194,10 +195,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             TextView windText =(TextView)findViewById(R.id.textViewWind);
                             TextView precipText =(TextView)findViewById(R.id.textViewPrecip);
 
-                            tempText.setText(temp.toString());
-                            humidText.setText(humid.toString());
-                            windText.setText(wind.toString());
-                            precipText.setText(precip.toString());
+                            tempText.setText(temp.toString()+"°F");
+                            humidText.setText(humid.toString()+"%");
+                            windText.setText(wind.toString()+"mph");
+                            precipText.setText(precip.toString()+"%");
 
                             System.out.println(temp+humid+wind+precip);
 
