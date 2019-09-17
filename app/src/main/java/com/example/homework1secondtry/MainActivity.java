@@ -118,10 +118,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         RequestQueue locationCheckQueue = Volley.newRequestQueue(this);
 
-        //String url = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyCHXOMmaHN8359i89ydVlay4dH4r7ec8Nc";
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyCHXOMmaHN8359i89ydVlay4dH4r7ec8Nc";
 
 
-        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCHXOMmaHN8359i89ydVlay4dH4r7ec8Nc";
+        //String url = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCHXOMmaHN8359i89ydVlay4dH4r7ec8Nc";
         System.out.println(url);
         StringRequest locationStringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -137,6 +137,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             String longitude = location.getString("lng");
 
                             System.out.println(latitude.toString()+", "+longitude.toString());
+
+                            double latD = Double.parseDouble(latitude);
+                            double lngD = Double.parseDouble(longitude);
+
+                            System.out.println(latD+", "+lngD);
+
+                            gmap.setMinZoomPreference(12);
+                            LatLng ny = new LatLng(latD, lngD);
+                            gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+
+                            getWeather(latD, lngD);
 
 
                         } catch (JSONException e) {
@@ -154,6 +165,59 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 });
 
         locationCheckQueue.add(locationStringRequest);
+
+    }
+
+    public void getWeather(Double lat, Double lng){
+        RequestQueue weatherRequestQueue = Volley.newRequestQueue(this);
+
+        String url = "https://api.darksky.net/forecast/3637ef1e41bca98d932636e877e04ea9/"+lat.toString()+","+lng.toString()+"?&exclude=minutely,hourly,daily,alerts,flags";
+
+        StringRequest weatherStringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONObject current = jsonObject.getJSONObject("currently");
+                            Double temp = current.getDouble("temperature");
+                            temp = Math.round(temp*100.0)/100.0;
+                            Double humid = current.getDouble("humidity");
+                            humid = Math.round(humid*100.0)/100.0;
+                            Double wind = current.getDouble("windSpeed");
+                            wind = Math.round(wind*100.0)/100.0;
+                            Double precip = current.getDouble("precipProbability");
+                            precip = Math.round(precip*100.0)/100.0;
+
+                            TextView tempText =(TextView)findViewById(R.id.textViewTemp);
+                            TextView humidText =(TextView)findViewById(R.id.textViewHumid);
+                            TextView windText =(TextView)findViewById(R.id.textViewWind);
+                            TextView precipText =(TextView)findViewById(R.id.textViewPrecip);
+
+                            tempText.setText(temp.toString());
+                            humidText.setText(humid.toString());
+                            windText.setText(wind.toString());
+                            precipText.setText(precip.toString());
+
+                            System.out.println(temp+humid+wind+precip);
+
+
+                        } catch (JSONException e) {
+                            System.out.println("EXCEPTION CAUGHT WEATHER");
+                            //e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        weatherRequestQueue.add(weatherStringRequest);
+
     }
 
     @Override
