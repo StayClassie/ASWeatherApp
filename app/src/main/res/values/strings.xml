@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Homework1Secondtry</string>
+    <string name="current_temp">*F</string>
+    <string name="current_humid">%</string>
+    <string name="current_wind">mph</string>
+    <string name="current_precip">%</string>
+    <string name="btn_enter">Enter</string>
+</resources>
