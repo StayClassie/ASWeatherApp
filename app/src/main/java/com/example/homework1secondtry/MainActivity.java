@@ -153,6 +153,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         } catch (JSONException e) {
                            System.out.println("EXCEPTION CAUGHT");
+                            Toast toast=Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT);
+                            toast.setMargin(50,50);
+                            toast.show();
                            //e.printStackTrace();
                         }
 
