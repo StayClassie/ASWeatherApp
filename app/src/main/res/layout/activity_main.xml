@@ -7,6 +7,7 @@
     android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
+    //Chris Driving
 
     <TextView
         android:id="@+id/textViewTemp"
@@ -46,7 +47,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textViewPrecip"
         app:layout_constraintTop_toTopOf="@+id/textViewPrecip" />
-
+//end of Chris Driving
+    //David Driving
     <TextView
         android:id="@+id/textViewPrecip"
         android:layout_width="wrap_content"
@@ -70,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputTextAddress"
         app:layout_constraintVertical_bias="0.614" />
-
+//Chris Driving
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -95,7 +97,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPrecip" />
-
+//David Driving
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

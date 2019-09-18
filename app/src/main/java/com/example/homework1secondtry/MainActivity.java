@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";    //api key
 
+    //Chris Driving
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
     }
+    //end of chris driving David driving
 
     //COPIED from https://www.zoftino.com/android-mapview-tutorial/////
     @Override
@@ -106,9 +108,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng ny = new LatLng(40.7143528, -74.0059731);
         gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
     }
-
+//end of David Driving
     ////////////
 
+    //Chris and David
     public void getLocation(View view) {
 
         final TextView textView = (TextView) findViewById(R.id.text);
@@ -172,6 +175,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
+    //Chris Driving
     public void getWeather(Double lat, Double lng){
         RequestQueue weatherRequestQueue = Volley.newRequestQueue(this);
 
